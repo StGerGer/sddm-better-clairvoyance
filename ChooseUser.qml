@@ -45,7 +45,7 @@ ListView {
     id: selector
     width: 32
     height: 32
-    source: "Assets/Selector.png"
+    source: config.darkText ? "Assets/svg/dark/chevron-up.svg" : "Assets/svg/light/chevron-up.svg"
     x: listView.currentItem.x + (listView.currentItem.width / 2) - 16
     y: listView.currentItem.y + listView.currentItem.height
 

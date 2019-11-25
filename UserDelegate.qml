@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.13
 
 Item {
 
@@ -13,13 +14,27 @@ Item {
   Text {
     id: usersName
 
-    color: "white"
+    color: config.darkText ? "#111" : "white"
     font {
-      family: "FiraMono"
-      pointSize: 20
+      family: config.fontFamily
+      pointSize: 16
     }
     text: realName
     anchors.horizontalCenter: parent.horizontalCenter
+  }
+
+  // Border around profile
+  Rectangle {
+    id: profileBorder
+    width: 138
+    height: 138
+    radius: 69
+    anchors {
+      top: usersName.bottom
+      topMargin: 45
+      horizontalCenter: parent.horizontalCenter
+    }
+    color: config.darkText ? "#111" : "white"
   }
 
   //User's Profile Pic
@@ -34,6 +49,19 @@ Item {
       horizontalCenter: parent.horizontalCenter
     }
     source: icon
+    layer.enabled: true
+    layer.effect: OpacityMask {
+      maskSource: profileMask
+    }
+  }
+
+  // Mask for profile image
+  Rectangle {
+    id: profileMask
+    width: 128
+    height: 128
+    radius: 64
+    visible: false
   }
 
   MouseArea {

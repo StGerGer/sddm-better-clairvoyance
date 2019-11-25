@@ -1,10 +1,11 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.12
 import SddmComponents 2.0
 
 Row {
   id: powerFrame
 
-  spacing: 5
+  spacing: 15
 
   anchors {
       bottom: page.bottom
@@ -13,91 +14,132 @@ Row {
       bottomMargin: 50
   }
 
-  Image {
-    id: shutdownButton
-    width: 64
-    height: 64
-    source: "Assets/shutdown_normal.png"
+  // Shutdown button
+  Item {
 
-    MouseArea {
-      id: shutdownArea
-      anchors.fill: parent
-      hoverEnabled: true
-
-      onClicked: sddm.powerOff();
-    }
+    width: 32
+    height: 32
 
     //Hover Effect
-    Image {
+    DropShadow {
       id: shutdownHover
-      anchors.fill: parent
-      source: "Assets/shutdown_hover.png"
-      opacity: shutdownArea.containsMouse ? 1 : 0
+      anchors.fill: shutdownButton
+      source: shutdownButton
+      opacity: shutdownArea.containsMouse ? 0.3 : 0
+      color: "#111"
+      verticalOffset: 3
+      horizontalOffset:3
+      cached: true
+      radius: 6
+      samples: 8
 
       Behavior on opacity {
         NumberAnimation { duration: 350; easing.type: Easing.InOutQuad}
       }
     }
+
+    Image {
+      id: shutdownButton
+      width: 32
+      height: 32
+      source: config.darkText ? "Assets/svg/dark/power.svg" : "Assets/svg/light/power.svg"
+
+      MouseArea {
+        id: shutdownArea
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+
+        onClicked: sddm.powerOff();
+      }
+    }
   }
 
-  Image {
-    id: restartButton
-    width: 64
-    height: 64
-    source: "Assets/restart_normal.png"
+  // Restart button
+  Item {
 
-    MouseArea {
-      id: restartArea
-      anchors.fill: parent
-      hoverEnabled: true
+    width: 32
+    height: 32
 
-      onClicked: sddm.reboot();
-    }
-
-    //Hover Effect
-    Image {
+    // Restart hover shadow
+    DropShadow {
       id: restartHover
-      anchors.fill: parent
-      source: "Assets/restart_hover.png"
-      opacity: restartArea.containsMouse ? 1 : 0
+      anchors.fill: restartButton
+      source: restartButton
+      opacity: restartArea.containsMouse ? 0.3 : 0
+      color: "#111"
+      verticalOffset: 3
+      horizontalOffset:3
+      cached: true
+      radius: 6
+      samples: 8
 
       Behavior on opacity {
         NumberAnimation { duration: 350; easing.type: Easing.InOutQuad}
       }
     }
-  }
-
-  Image {
-    id: sessionButton
-    width: 64
-    height: 64
-    source: "Assets/session_normal.png"
-
-    MouseArea {
-      id: sessionArea
-      anchors.fill: parent
-      hoverEnabled: true
-
-      onClicked: {
-        if (sessionSelect.state == "show")
-          sessionSelect.state = "";
-        else if (sessionSelect.state == "")
-          sessionSelect.state = "show";
-      }
-    }
-
-    //Hover Effect
+    
     Image {
+      id: restartButton
+      width: 32
+      height: 32
+      source: config.darkText ? "Assets/svg/dark/refresh-cw.svg" : "Assets/svg/light/refresh-cw.svg"
+
+      MouseArea {
+        id: restartArea
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+
+        onClicked: sddm.reboot();
+      }
+    }
+  }
+  
+  Item {
+
+    width: 32
+    height: 32
+
+    // Hover shadow
+    DropShadow {
       id: sessionHover
-      anchors.fill: parent
-      source: "Assets/session_hover.png"
-      opacity: sessionArea.containsMouse ? 1 : 0
+      anchors.fill: sessionButton
+      source: sessionButton
+      opacity: sessionArea.containsMouse ? 0.3 : 0
+      color: "#111"
+      verticalOffset: 3
+      horizontalOffset:3
+      cached: true
+      radius: 6
+      samples: 8
 
       Behavior on opacity {
         NumberAnimation { duration: 350; easing.type: Easing.InOutQuad}
       }
     }
 
+    Image {
+      id: sessionButton
+      width: 32
+      height: 32
+      source: config.darkText ? "Assets/svg/dark/settings.svg" : "Assets/svg/light/settings.svg"
+
+      MouseArea {
+        id: sessionArea
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+
+        onClicked: {
+          if (sessionSelect.state == "show")
+            sessionSelect.state = "";
+          else if (sessionSelect.state == "")
+            sessionSelect.state = "show";
+        }
+      }
+    }
   }
+  
 
 }

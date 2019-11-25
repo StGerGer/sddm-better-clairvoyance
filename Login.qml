@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
+import QtGraphicalEffects 1.13
 
 Item {
   id: loginFrame
@@ -15,7 +16,7 @@ Item {
   focus: false
 
   Behavior on opacity {
-    NumberAnimation { duration: 500; easing.type: Easing.InOutQuad }
+    NumberAnimation { duration: 200; easing.type: Easing.InOutQuad }
   }
 
   //Functions:
@@ -80,13 +81,13 @@ Item {
     PropertyAnimation {
       properties: "opacity"
       easing.type: Easing.InOutQuad
-      duration: 750
+      duration: 100
     }
 
     PropertyAnimation {
       properties: "height"
       easing.type: Easing.InOutQuad
-      duration: 750
+      duration: 100
     }
   }
 
@@ -128,16 +129,30 @@ Item {
     Text {
       id: usersName
 
-      color: "white"
+      color: config.darkText ? "#111" : "white"
       font {
-        family: "FiraMono"
-        pointSize: 20
+        family: config.fontFamily
+        pointSize: config.HiDPI ? 20 : 32
       }
-      text: loginFrame.realName
+      text: config.showGreeting ? config.greeting + ", " + loginFrame.realName.split(" ")[0] : loginFrame.realName
       anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    //User's Profile Pic
+    // Border around profile
+    Rectangle {
+      id: profileBorder
+      width: 138
+      height: 138
+      radius: 69
+      anchors {
+        top: usersName.bottom
+        topMargin: 45
+        horizontalCenter: parent.horizontalCenter
+      }
+      color: config.darkText ? "#111" : "white"
+    }
+
+    // User's Profile Pic
     Image {
       id: usersPic
 
@@ -148,7 +163,20 @@ Item {
         topMargin: 50
         horizontalCenter: parent.horizontalCenter
       }
-      source: loginFrame.icon
+      source: icon
+      layer.enabled: true
+      layer.effect: OpacityMask {
+        maskSource: profileMask
+      }
+    }
+
+    // Mask for profile image
+    Rectangle {
+      id: profileMask
+      width: 128
+      height: 128
+      radius: 64
+      visible: false
     }
 
   }
@@ -157,10 +185,10 @@ Item {
     id: passwordStatus
 
     text: "Incorrect Password!"
-    color: "white"
+    color: config.darkText ? "#111" : "white"
     font {
-      pointSize: 10
-      family: "FiraMono"
+      pointSize: 8
+      family: config.fontFamily
     }
 
     anchors {
@@ -209,11 +237,11 @@ Item {
         topMargin: 15
         leftMargin: 15
       }
-      text: "Password..."
-      color: "white"
+      text: "Password"
+      color: config.darkText ? "#111" : "white"
       font {
-        pointSize: 14
-        family: "FiraMono"
+        pointSize: 10
+        family: config.fontFamily
       }
       opacity: 0.3
     }
@@ -228,11 +256,11 @@ Item {
         rightMargin: 50
       }
       font {
-        pointSize: 14
-        family: "FiraMono"
+        pointSize: config.HiDPI ? 10 : 16
+        family: config.fontFamily
         letterSpacing: 2
       }
-      color: "white"
+      color: config.darkText ? "#111" : "white"
       echoMode:TextInput.Password
       clip: true
 
@@ -250,16 +278,17 @@ Item {
       width: 30
       height: 30
       opacity: 0
-      source: "Assets/RightArrow.png"
+      source: config.darkText ? "Assets/svg/dark/arrow-right.svg" : "Assets/svg/light/arrow-right.svg"
 
       MouseArea {
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+
         onClicked: {
           loginFrame.login()
         }
       }
     }
-
   }
 
   Rectangle {
@@ -271,9 +300,8 @@ Item {
       bottom: passwordBox.bottom
       left: passwordBox.left
     }
-    color: "white"
+    color: config.darkText ? "#111" : "white"
     opacity: 0.3
-    radius: 4
+    radius: 10
   }
-
 }

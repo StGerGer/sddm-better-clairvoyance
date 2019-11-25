@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name=Better Clairvoyance
+Description=A modern SDDM theme based on Clairvoyance
+License=CC-BY-SA
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+Theme-Id=better-clairvoyance
+Theme-API=2.0
+Screenshot=better-clairvoyance.png
