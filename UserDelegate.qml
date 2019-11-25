@@ -14,7 +14,7 @@ Item {
   Text {
     id: usersName
 
-    color: config.darkText ? "#111" : "white"
+    color: (config.darkText == "true") ? "#111" : "white"
     font {
       family: config.fontFamily
       pointSize: 16
@@ -34,7 +34,7 @@ Item {
       topMargin: 45
       horizontalCenter: parent.horizontalCenter
     }
-    color: config.darkText ? "#111" : "white"
+    color: (config.darkText == "true") ? "#111" : "white"
   }
 
   //User's Profile Pic

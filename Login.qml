@@ -129,10 +129,10 @@ Item {
     Text {
       id: usersName
 
-      color: config.darkText ? "#111" : "white"
+      color: (config.darkText == "true") ? "#111" : "white"
       font {
         family: config.fontFamily
-        pointSize: config.HiDPI ? 20 : 32
+        pointSize: (config.HiDPI == "true") ? 20 : 32
       }
       text: config.showGreeting ? config.greeting + ", " + loginFrame.realName.split(" ")[0] : loginFrame.realName
       anchors.horizontalCenter: parent.horizontalCenter
@@ -149,7 +149,7 @@ Item {
         topMargin: 45
         horizontalCenter: parent.horizontalCenter
       }
-      color: config.darkText ? "#111" : "white"
+      color: (config.darkText == "true") ? "#111" : "white"
     }
 
     // User's Profile Pic
@@ -185,7 +185,7 @@ Item {
     id: passwordStatus
 
     text: "Incorrect Password!"
-    color: config.darkText ? "#111" : "white"
+    color: (config.darkText == "true") ? "#111" : "white"
     font {
       pointSize: 8
       family: config.fontFamily
@@ -205,7 +205,7 @@ Item {
       running: false
       repeat: false
       onTriggered: {
-        passwordStatus.opacity= 0
+        passwordStatus.opacity = 0
       }
     }
 
@@ -238,7 +238,7 @@ Item {
         leftMargin: 15
       }
       text: "Password"
-      color: config.darkText ? "#111" : "white"
+      color: (config.darkText == "true") ? "#111" : "white"
       font {
         pointSize: 10
         family: config.fontFamily
@@ -256,11 +256,11 @@ Item {
         rightMargin: 50
       }
       font {
-        pointSize: config.HiDPI ? 10 : 16
+        pointSize: (config.HiDPI == "true") ? 10 : 16
         family: config.fontFamily
         letterSpacing: 2
       }
-      color: config.darkText ? "#111" : "white"
+      color: (config.darkText == "true") ? "#111" : "white"
       echoMode:TextInput.Password
       clip: true
 
@@ -278,7 +278,7 @@ Item {
       width: 30
       height: 30
       opacity: 0
-      source: config.darkText ? "Assets/svg/dark/arrow-right.svg" : "Assets/svg/light/arrow-right.svg"
+      source: (config.darkText == "true") ? "Assets/svg/dark/arrow-right.svg" : "Assets/svg/light/arrow-right.svg"
 
       MouseArea {
         anchors.fill: parent
@@ -300,7 +300,7 @@ Item {
       bottom: passwordBox.bottom
       left: passwordBox.left
     }
-    color: config.darkText ? "#111" : "white"
+    color: (config.darkText == "true") ? "#111" : "white"
     opacity: 0.3
     radius: 10
   }

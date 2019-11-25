@@ -42,7 +42,7 @@ Row {
       id: shutdownButton
       width: 32
       height: 32
-      source: config.darkText ? "Assets/svg/dark/power.svg" : "Assets/svg/light/power.svg"
+      source: (config.darkText == "true") ? "Assets/svg/dark/power.svg" : "Assets/svg/light/power.svg"
 
       MouseArea {
         id: shutdownArea
@@ -83,7 +83,7 @@ Row {
       id: restartButton
       width: 32
       height: 32
-      source: config.darkText ? "Assets/svg/dark/refresh-cw.svg" : "Assets/svg/light/refresh-cw.svg"
+      source: (config.darkText == "true") ? "Assets/svg/dark/refresh-cw.svg" : "Assets/svg/light/refresh-cw.svg"
 
       MouseArea {
         id: restartArea
@@ -123,7 +123,7 @@ Row {
       id: sessionButton
       width: 32
       height: 32
-      source: config.darkText ? "Assets/svg/dark/settings.svg" : "Assets/svg/light/settings.svg"
+      source: (config.darkText == "true") ? "Assets/svg/dark/settings.svg" : "Assets/svg/light/settings.svg"
 
       MouseArea {
         id: sessionArea

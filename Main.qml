@@ -42,7 +42,7 @@ Item {
   Rectangle {
     id: sessionListContainer
 
-    color: config.darkText ? "#AA111111" : "#AAFFFFFF"
+    color: (config.darkText == "true") ? "#AA111111" : "#AAFFFFFF"
 
     anchors {
       bottom: powerFrame.top
@@ -76,7 +76,7 @@ Item {
           anchors.left: parent.left
           anchors.verticalCenter: parent.verticalCenter
           anchors.leftMargin: 5
-          source: config.darkText ? "Assets/svg/light/check.svg" : "Assets/svg/dark/check.svg"
+          source: (config.darkText == "true") ? "Assets/svg/light/check.svg" : "Assets/svg/dark/check.svg"
           opacity: sessionSelect.currentIndex == index ? 1 : 0
         }
 
@@ -84,10 +84,10 @@ Item {
           width: parent.width
           height: parent.height
           text: name
-          color: config.darkText ? "white" : "#111"
+          color: (config.darkText == "true") ? "white" : "#111"
           opacity: (delegateArea.containsMouse || sessionSelect.currentIndex == index) ? 1 : 0.3
           font {
-            pointSize: (config.enableHDPI == "true") ? 6 : 12
+            pointSize: (config.enableHiDPI == "true") ? 6 : 12
             family: config.fontFamily
           }
           wrapMode: Text.Wrap
