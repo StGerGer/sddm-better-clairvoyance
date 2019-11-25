@@ -48,7 +48,7 @@ Item {
       bottom: powerFrame.top
       right: page.right
       rightMargin: 35
-      bottomMargin: 10
+      bottomMargin: 15
     }
 
     visible: false
@@ -57,6 +57,38 @@ Item {
     width: sessionSelect.currentItem.width + 10
     height: sessionSelect.count * sessionSelect.currentItem.height + 10
     radius: 10
+
+    // Triangle at bottom of the session list
+
+    Rectangle {
+      width: 30
+      height:10
+      color: "#00FFFFFF"
+
+      anchors {
+        top: sessionListContainer.bottom
+        right: sessionListContainer.right
+        rightMargin: 16
+      }
+
+      Canvas {
+        anchors.fill: parent
+
+        onPaint: {
+          var context = getContext("2d");
+          
+          context.beginPath();
+          context.moveTo(0, 0);
+          context.lineTo(30, 0);
+          context.lineTo(15, 10);
+          context.closePath();   
+
+          // the fill color
+          context.fillStyle = (config.darkText == "true") ? "#AA111111" : "#AAFFFFFF";
+          context.fill();
+        }
+      }
+    }
 
     ListView {
       id: sessionSelect
@@ -87,7 +119,7 @@ Item {
           color: (config.darkText == "true") ? "white" : "#111"
           opacity: (delegateArea.containsMouse || sessionSelect.currentIndex == index) ? 1 : 0.3
           font {
-            pointSize: (config.enableHiDPI == "true") ? 6 : 12
+            pointSize: (config.enableHiDPI == "true") ? 8 : 12
             family: config.fontFamily
           }
           wrapMode: Text.Wrap
@@ -159,7 +191,6 @@ Item {
       ]
     }
   }
-  
 
   ChooseUser {
     id: listView
